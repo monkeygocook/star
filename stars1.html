@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Night Sky</title>
-    <link rel="stylesheet" href="stars.css">
+    <link rel="stylesheet" href="stars1.css">
     <style>
         /* สไตล์สำหรับปุ่ม */
         .bottom-left-button {
@@ -53,39 +53,44 @@
     <div id="night-sky"></div>
 
     <!-- ปุ่มลิงก์ไป stars1.html -->
-    <a href="stars1.html" class="bottom-left-button">Stars</a>
+    <a href="index.html" class="bottom-left-button">Meteor</a>
     <a href="stars2.html" class="bottom-right-button">Stars&Meteor</a>
 
     <script>
         const nightSky = document.getElementById("night-sky");
-
+    
         function createStar() {
             const star = document.createElement("div");
             star.classList.add("star");
-            star.style.setProperty("--top", `${Math.random() * 100}%`);
-            star.style.setProperty("--left", `${Math.random() * 100}%`);
-            star.style.setProperty("--size", Math.random() * 1 + 0.5);
-            star.style.setProperty("--duration", `${Math.random() * 3 + 5}s`);
-            star.style.setProperty("--delay", `${Math.random() * 2}s`);
-            star.style.setProperty("--travel", `${Math.random() * 200 + 100}vw`);
-
+    
+            // สุ่มตำแหน่ง
+            star.style.top = Math.random() * 100 + "%";
+            star.style.left = Math.random() * 100 + "%";
+    
+            // สุ่มความเร็วของการกระพริบ
+            const duration = Math.random() * 3 + 2; // ช่วงเวลา 2-5 วินาที
+            const delay = Math.random() * 5; // ดีเลย์การกระพริบ 0-5 วินาที
+            star.style.animationDuration = `${duration}s`;
+            star.style.animationDelay = `${delay}s`;
+    
             nightSky.appendChild(star);
-
-            // ลบดาวหลังแอนิเมชันจบ
+    
+            // ลบดาวหลังจากสุ่มจำนวนวินาที (เพื่อควบคุมไม่ให้ดาวเยอะเกินไป)
             setTimeout(() => {
                 nightSky.removeChild(star);
-            }, 8000); // 8 วินาที
+            }, (duration + delay) * 1000);
         }
-
-        function createMultipleStars() {
-            const numStars = 10; // จำนวนดาวที่สร้างในแต่ละครั้ง
-            for (let i = 0; i < numStars; i++) {
-                createStar();
-            }
+    
+        function generateStars() {
+            setInterval(() => {
+                createStar(); // สร้างดาว 1 ดวงทุก ๆ 500 มิลลิวินาที
+            }, 100);
         }
-
-        // สร้างดาวทุก ๆ 2 วินาที
-        setInterval(createMultipleStars, 2000);
+    
+        // เรียกฟังก์ชันเมื่อหน้าโหลด
+        generateStars();
     </script>
+    
+    
 </body>
 </html>

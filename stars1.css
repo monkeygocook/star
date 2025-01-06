@@ -1,0 +1,36 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #000428, #004e92); /* สีพื้นหลัง */
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* ภาชนะสำหรับดาว */
+#night-sky {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* ดาวกระพริบ */
+.star {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.8); /* เพิ่มเงา */
+    opacity: 0; /* เริ่มต้นให้ดาวมองไม่เห็น */
+    animation: twinkle ease-in-out infinite;
+}
+
+/* แอนิเมชันสำหรับดาวกระพริบ */
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
