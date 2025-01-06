@@ -1,0 +1,63 @@
+/* ท้องฟ้า */
+#night-sky {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom, #000428, #004e92);
+    overflow: hidden;
+}
+
+/* ดาวกระพริบ */
+.star {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    animation: twinkle 2s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* ดาวตก */
+.falling-star {
+    position: absolute;
+    filter: drop-shadow(0 0 6px lightseagreen);
+    background-color: lightseagreen;
+    border-radius: 50%; /* ทำให้ดาวเป็นวงกลม */
+    opacity: 0; /* เริ่มต้นดาวมองไม่เห็น */
+    width: calc(var(--size, 1) * 5px);
+    height: calc(var(--size, 1) * 10px);
+    transform: rotate(-45deg);
+    animation: shooting-star ease-in-out infinite;
+    animation-duration: var(--duration, 6s); /* เพิ่มระยะเวลานานขึ้น */
+    animation-delay: var(--delay, 0s);
+    top: var(--top, 50%);
+    left: var(--left, 50%);
+}
+
+@keyframes shooting-star {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) rotate(-45deg) scale(1);
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translate(calc(var(--travel, 100vw)), calc(var(--travel, 100vw))) rotate(-45deg) scale(0.5);
+    }
+}

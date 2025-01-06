@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Night Sky</title>
+    <link rel="stylesheet" href="stars1.css">
+    <style>
+        /* สไตล์สำหรับปุ่ม */
+        .bottom-left-button {
+            position: fixed; /* ปุ่มจะอยู่ในตำแหน่งคงที่ */
+            bottom: 20px; /* ระยะจากด้านล่าง */
+            left: 20px; /* ระยะจากด้านซ้าย */
+            background-color: lightseagreen;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none; /* เอาเส้นใต้ลิงก์ออก */
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .bottom-left-button:hover {
+            background-color: teal; /* สีปุ่มเปลี่ยนเมื่อ hover */
+        }
+        .bottom-right-button {
+            position: fixed; /* ปุ่มจะอยู่ในตำแหน่งคงที่ */
+            bottom: 20px; /* ระยะจากด้านล่าง */
+            right: 20px; /* ระยะจากด้านซ้าย */
+            background-color: lightseagreen;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none; /* เอาเส้นใต้ลิงก์ออก */
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .bottom-left-button:hover {
+            background-color: teal; /* สีปุ่มเปลี่ยนเมื่อ hover */
+        }
+    </style>
+</head>
+<body>
+    <div id="night-sky"></div>
+
+    <!-- ปุ่มลิงก์ไป stars1.html -->
+    <a href="index.html" class="bottom-left-button">Meteor</a>
+    <a href="stars2.html" class="bottom-right-button">Stars&Meteor</a>
+
+    <script>
+        const nightSky = document.getElementById("night-sky");
+    
+        function createStar() {
+            const star = document.createElement("div");
+            star.classList.add("star");
+    
+            // สุ่มตำแหน่ง
+            star.style.top = Math.random() * 100 + "%";
+            star.style.left = Math.random() * 100 + "%";
+    
+            // สุ่มความเร็วของการกระพริบ
+            const duration = Math.random() * 3 + 2; // ช่วงเวลา 2-5 วินาที
+            const delay = Math.random() * 5; // ดีเลย์การกระพริบ 0-5 วินาที
+            star.style.animationDuration = `${duration}s`;
+            star.style.animationDelay = `${delay}s`;
+    
+            nightSky.appendChild(star);
+    
+            // ลบดาวหลังจากสุ่มจำนวนวินาที (เพื่อควบคุมไม่ให้ดาวเยอะเกินไป)
+            setTimeout(() => {
+                nightSky.removeChild(star);
+            }, (duration + delay) * 1000);
+        }
+    
+        function generateStars() {
+            setInterval(() => {
+                createStar(); // สร้างดาว 1 ดวงทุก ๆ 500 มิลลิวินาที
+            }, 100);
+        }
+    
+        // เรียกฟังก์ชันเมื่อหน้าโหลด
+        generateStars();
+    </script>
+    
+    
+</body>
+</html>
